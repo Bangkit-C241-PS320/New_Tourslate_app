@@ -1,30 +1,47 @@
 package com.example.new_tourslate.ui.splash
 
+
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.new_tourslate.R
+import com.example.new_tourslate.databinding.ActivitySplashScreenBinding
 import com.example.new_tourslate.ui.main.MainActivity
 
+
+
 class SplashScreenActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivitySplashScreenBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         enableEdgeToEdge()
-        setContentView(R.layout.activity_splash_screen)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 3000)
+
+        val intent = Intent(this, MainActivity::class.java)
+
+        // Set initial alpha to 0
+        binding.logo.alpha = 0f
+
+        // Animate alpha to 1
+        binding.logo.animate()
+            .setDuration(3000)
+            .alpha(1f)
+            .withEndAction {
+                startActivity(intent)
+                finish()
+            }
     }
 }
