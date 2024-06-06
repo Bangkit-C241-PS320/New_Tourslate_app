@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">New_Tourslate</string>
+    <string name="app_name">Tourslate</string>
+    <string-array name="dropdown_items_input">
+        <item>Indonesia</item>
+        <item>English</item>
+        <item>Javanese</item>
+    </string-array>
+    <string-array name="dropdown_items_result">
+        <item>English</item>
+        <item>Indonesia</item>
+        <item>Javanese</item>
+    </string-array>
+    <string name="translate">Translate</string>
+    <string name="hint">apa yang ingin di translate?</string>
+    <string name="mode">Night Mode</string>
 </resources>
