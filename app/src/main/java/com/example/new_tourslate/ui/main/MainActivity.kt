@@ -1,30 +1,28 @@
 package com.example.new_tourslate.ui.main
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.new_tourslate.R
+import com.example.new_tourslate.data.retrofit.ApiConfig
+import com.example.new_tourslate.databinding.ActivityMainBinding
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.HttpException
+import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : Activity() {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        val spinner: Spinner = findViewById(R.id.spinner_input)
-        val spinner2: Spinner = findViewById(R.id.spinner_input2)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
@@ -35,18 +33,26 @@ class MainActivity : AppCompatActivity() {
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
-            spinner.adapter = adapter
+            binding.spinnerInput.adapter = adapter
         }
 
         // Set up a listener for the spinner
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+        binding.spinnerInput.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                val apiService = ApiConfig.getApiService()
                 val selectedItem = parent.getItemAtPosition(position).toString()
-                Toast.makeText(this@MainActivity, "Selected: $selectedItem", Toast.LENGTH_SHORT).show()
+                val requestBody = selectedItem.toRequestBody("text/plain".toMediaType())
+                apiService.uploadText(requestBody)
             }
-
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Another interface callback
+                val apiService = ApiConfig.getApiService()
+                val requestBody = "Indonesia".toRequestBody("text/plain".toMediaType())
+                apiService.uploadText(requestBody)
             }
         }
 
@@ -59,23 +65,60 @@ class MainActivity : AppCompatActivity() {
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
-            spinner2.adapter = adapter
+            binding.spinnerInput2.adapter = adapter
         }
 
         // Set up a listener for the spinner
-        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+        binding.spinnerInput2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                val apiService = ApiConfig.getApiService()
                 val selectedItem = parent.getItemAtPosition(position).toString()
-                Toast.makeText(this@MainActivity, "Selected: $selectedItem", Toast.LENGTH_SHORT).show()
+                val requestBody = selectedItem.toRequestBody("text/plain".toMediaType())
+                apiService.uploadText(requestBody)
             }
-
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Another interface callback
+                val apiService = ApiConfig.getApiService()
+                val requestBody = "English".toRequestBody("text/plain".toMediaType())
+                apiService.uploadText(requestBody)
             }
         }
-
-
+    }
+    private fun getResult(){
+        val apiService = ApiConfig.getApiService()
+        apiService.getText().enqueue(object  : Callback<CancerNewsResponse> {
+            override fun onResponse(
+                call: Call<CancerNewsResponse>,
+                response: Response<CancerNewsResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    // Assuming your data has a "title" field for display
+                    val title = data?.title ?: "No data available"  // Handle potential null value
+                    textView.text = title
+                } else {
+                    // Handle API error
+                    textView.text = "Error fetching data"
+                }
+            }
+            override fun onFailure(call: Call<List<Post>>, t: Throwable) {
+                // Tampilkan pesan error jika request gagal
+            }
+        })
     }
 
+    private fun postText(){
+        val apiService = ApiConfig.getApiService()
+        val text = binding.editText.text.toString()
+        val requestBody = text.toRequestBody("text/plain".toMediaType())
+        try {
+            apiService.uploadText(requestBody)
+        } catch (e: HttpException){
 
+        }
     }
+}
