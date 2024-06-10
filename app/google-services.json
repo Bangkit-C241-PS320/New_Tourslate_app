@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "226382579480",
+    "firebase_url": "https://tourslate-capstone-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tourslate-capstone",
+    "storage_bucket": "tourslate-capstone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226382579480:android:4bb8017755f1300020c06d",
+        "android_client_info": {
+          "package_name": "com.example.new_tourslate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4XuCa9vDtkvKKM98nXFH4T8W-IoaU1Yw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

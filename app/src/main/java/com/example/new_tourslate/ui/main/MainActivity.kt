@@ -1,10 +1,12 @@
 package com.example.new_tourslate.ui.main
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.CompoundButton
 import android.widget.Spinner
 import android.widget.Toast
 import com.example.new_tourslate.R
@@ -16,6 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : Activity() {
     private lateinit var binding: ActivityMainBinding
@@ -77,6 +80,13 @@ class MainActivity : Activity() {
                 id: Long
             ) {
                 val apiService = ApiConfig.getApiService()
+        binding.spinnerInput2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
                 val requestBody = selectedItem.toRequestBody("text/plain".toMediaType())
                 apiService.uploadText(requestBody)
@@ -111,6 +121,15 @@ class MainActivity : Activity() {
         })
     }
 
+        val switchTheme = findViewById<SwitchMaterial>(R.id.switchNightMode)
+
+        val pref = SettingPreferences.getInstance(application.dataStore)
+        val settingViewModel =
+            ViewModelProvider(this, ViewModelFactory(pref)).get(SettingViewModel::class.java)
+        settingViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+            switchTheme.isChecked = isDarkModeActive
+        }
+
     private fun postText(){
         val apiService = ApiConfig.getApiService()
         val text = binding.editText.text.toString()
@@ -118,7 +137,18 @@ class MainActivity : Activity() {
         try {
             apiService.uploadText(requestBody)
         } catch (e: HttpException){
+        switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            settingViewModel.saveThemeSetting(isChecked)
+            changeAppTheme(isChecked, this@MainActivity)
+        }
+    }
 
+        }
+    private fun changeAppTheme(isDarkModeActive: Boolean, context: Context) {
+        if (isDarkModeActive) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 }
