@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.new_tourslate.R
 import com.example.new_tourslate.databinding.ActivitySplashScreenBinding
+import com.example.new_tourslate.ui.login.LoginActivity
 import com.example.new_tourslate.ui.main.MainActivity
 
 
@@ -30,7 +31,7 @@ class SplashScreenActivity : AppCompatActivity() {
             insets
         }
 
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
 
         // Set initial alpha to 0
         binding.logo.alpha = 0f
