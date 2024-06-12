@@ -22,7 +22,7 @@
             app:layout_constraintBottom_toTopOf="@+id/input_text"
             app:layout_constraintEnd_toEndOf="@+id/input_text"
             app:layout_constraintStart_toStartOf="@+id/input_text"
-            tools:text="Javanese" />
+            android:text="Javanese" />
 
         <TextView
             android:id="@+id/input_text"
@@ -35,7 +35,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Sek Tajukuno" />
+            android:text="Sek Tajukuno" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
             app:layout_constraintBottom_toTopOf="@+id/result_text"
             app:layout_constraintEnd_toEndOf="@+id/result_text"
             app:layout_constraintStart_toStartOf="@+id/result_text"
-            tools:text="Indonesia" />
+            android:text="Indonesia" />
 
         <TextView
             android:id="@+id/result_text"
@@ -72,7 +72,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="sabar ambilkan" />
+            android:text="sabar ambilkan" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
