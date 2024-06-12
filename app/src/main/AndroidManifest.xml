@@ -13,6 +13,12 @@
         android:theme="@style/Theme.New_Tourslate"
         tools:targetApi="31">
         <activity
+            android:name=".ui.history.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.setting.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.signup.SignupActivity"
             android:exported="false" />
         <activity
@@ -28,14 +34,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            />
-
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

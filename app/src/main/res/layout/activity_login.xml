@@ -117,4 +117,20 @@
         app:layout_constraintStart_toStartOf="@+id/passwordEditTextLayout"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
+    <Button
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="40dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/noto_serif"
+        android:elevation="4dp"
+        />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
         <item>Javanese</item>
     </string-array>
     <string name="translate">Translate</string>
-    <string name="hint">apa yang ingin di translate?</string>
+    <string name="hint">What do you want to translate?</string>
     <string name="mode">Night Mode</string>
     <string name="email">Email</string>
     <string name="login">Login</string>
@@ -19,6 +19,6 @@
     <string name="sign_up">Sign Up</string>
     <string name="logout">Logout</string>
     <string name="password">Password</string>
-    <string name="sudah_memiliki_akun">Sudah memiliki akun?</string>
-    <string name="login_disini">Login Disini!</string>
+    <string name="sudah_memiliki_akun">Do you have account?</string>
+    <string name="login_disini">Login Here!</string>
 </resources>
