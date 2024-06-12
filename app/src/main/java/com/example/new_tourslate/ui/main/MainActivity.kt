@@ -61,17 +61,21 @@ class MainActivity : Activity() {
                 position: Int,
                 id: Long
             ) {
-                val apiService = ApiConfig.getApiService()
-                val selectedItem = parent.getItemAtPosition(position).toString()
-                val requestBody = selectedItem.toRequestBody("text/plain".toMediaType())
-                apiService.uploadText(requestBody)
+//                val apiService = ApiConfig.getApiService()
+//                val selectedItem = parent.getItemAtPosition(position).toString()
+//                val requestBody = selectedItem.toRequestBody("text/plain".toMediaType())
+//                apiService.uploadText(requestBody)
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                val apiService = ApiConfig.getApiService()
-                val requestBody = "Indonesia".toRequestBody("text/plain".toMediaType())
-                apiService.uploadText(requestBody)
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
             }
+
+//            override fun onNothingSelected(parent: AdapterView<*>) {
+//                val apiService = ApiConfig.getApiService()
+//                val requestBody = "Indonesia".toRequestBody("text/plain".toMediaType())
+//                apiService.uploadText(requestBody)
+//            }
         }
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -103,16 +107,20 @@ class MainActivity : Activity() {
                             position: Int,
                             id: Long
                         ) {
-                            val selectedItem = parent.getItemAtPosition(position).toString()
-                            val requestBody = selectedItem.toRequestBody("text/plain".toMediaType())
-                            apiService.uploadText(requestBody)
+//                            val selectedItem = parent.getItemAtPosition(position).toString()
+//                            val requestBody = selectedItem.toRequestBody("text/plain".toMediaType())
+//                            apiService.uploadText(requestBody)
                         }
 
-                        override fun onNothingSelected(parent: AdapterView<*>) {
-                            val apiService = ApiConfig.getApiService()
-                            val requestBody = "English".toRequestBody("text/plain".toMediaType())
-                            apiService.uploadText(requestBody)
+                        override fun onNothingSelected(parent: AdapterView<*>?) {
+                            TODO("Not yet implemented")
                         }
+
+//                        override fun onNothingSelected(parent: AdapterView<*>) {
+//                            val apiService = ApiConfig.getApiService()
+//                            val requestBody = "English".toRequestBody("text/plain".toMediaType())
+//                            apiService.uploadText(requestBody)
+//                        }
                     }
             }
 

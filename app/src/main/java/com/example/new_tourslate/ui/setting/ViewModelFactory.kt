@@ -1,4 +1,4 @@
-package com.example.new_tourslate.ui.main
+package com.example.new_tourslate.ui.setting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

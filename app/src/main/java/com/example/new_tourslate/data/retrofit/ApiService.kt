@@ -8,11 +8,11 @@ import retrofit2.http.Part
 
 
 interface ApiService {
-    @POST("")
-    fun uploadText(
-    @Part("translate") translate: RequestBody
-    ): Call<>
-
-    @GET("")
-    fun getText() : Call<>
+//    @POST("")
+//    fun uploadText(
+//    @Part("translate") translate: RequestBody
+//    ): Call<>
+//
+//    @GET("")
+//    fun getText() : Call<>
 }
