@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.new_tourslate.R
 import com.example.new_tourslate.data.retrofit.ApiConfig
@@ -25,7 +27,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 import com.google.android.material.switchmaterial.SwitchMaterial
 
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
