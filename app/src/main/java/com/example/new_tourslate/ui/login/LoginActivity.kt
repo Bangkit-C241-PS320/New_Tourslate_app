@@ -4,12 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.new_tourslate.R
 import com.example.new_tourslate.databinding.ActivityLoginBinding
+import com.example.new_tourslate.ui.forgotpass.ForgotPasswordActivity
 import com.example.new_tourslate.ui.main.MainActivity
 import com.example.new_tourslate.ui.signup.SignupActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -33,19 +30,19 @@ class LoginActivity : AppCompatActivity() {
                 val password = etPassword.text.toString().trim()
 
                 if (email.isEmpty()){
-                    etEmail.error = "Email harus diisi"
+                    etEmail.error = "Email is required"
                     etEmail.requestFocus()
                     return@setOnClickListener
                 }
 
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    etEmail.error = "Email tidak valid"
+                    etEmail.error = "Invalid Email"
                     etEmail.requestFocus()
                     return@setOnClickListener
                 }
 
                 if (password.isEmpty() || password.length < 8){
-                    etPassword.error = "Password harus lebih dari 8 karakter"
+                    etPassword.error = "Password must be more than 8 characters"
                     etPassword.requestFocus()
                     return@setOnClickListener
                 }
@@ -54,7 +51,13 @@ class LoginActivity : AppCompatActivity() {
             }
 
             btnSignup.setOnClickListener {
-                Intent(this@LoginActivity, SignupActivity::class.java).also{
+                Intent(this@LoginActivity, SignupActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
+
+            forgotPassword.setOnClickListener {
+                Intent(this@LoginActivity, ForgotPasswordActivity::class.java).also {
                     startActivity(it)
                 }
             }

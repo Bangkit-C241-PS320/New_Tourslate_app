@@ -18,21 +18,36 @@ import com.example.new_tourslate.R
 import com.example.new_tourslate.data.retrofit.ApiConfig
 import com.example.new_tourslate.databinding.ActivityMainBinding
 import com.example.new_tourslate.ui.history.HistoryActivity
+import com.example.new_tourslate.ui.login.LoginActivity
 import com.example.new_tourslate.ui.setting.SettingActivity
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.HttpException
-import retrofit2.Response
+//import okhttp3.MediaType.Companion.toMediaType
+//import okhttp3.RequestBody.Companion.toRequestBody
+//import retrofit2.Call
+//import retrofit2.Callback
+//import retrofit2.HttpException
+//import retrofit2.Response
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth = FirebaseAuth.getInstance()
+
+        // Check if the user is logged in
+        if (auth.currentUser == null) {
+            Intent(this, LoginActivity::class.java).also { loginIntent ->
+                loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(loginIntent)
+            }
+            return
+        }
 
         //go to history activity
         binding.historyButton.setOnClickListener {
