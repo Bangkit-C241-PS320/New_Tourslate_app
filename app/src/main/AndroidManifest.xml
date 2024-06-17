@@ -13,6 +13,9 @@
         android:theme="@style/Theme.New_Tourslate"
         tools:targetApi="31">
         <activity
+            android:name=".ui.forgotpass.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.onboarding.OnBoardingActivity"
             android:exported="false" />
         <activity
