@@ -59,10 +59,16 @@ class MainActivity : AppCompatActivity() {
         binding.spinnerInput.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
-                view: View,
+                view: View?,
                 position: Int,
                 id: Long
             ) {
+                view?.let {
+                    // Your existing code here
+                } ?: run {
+                    // Handle the null case, log it or show a toast
+                    Toast.makeText(this@MainActivity, "View is null", Toast.LENGTH_SHORT).show()
+                }
 //                val apiService = ApiConfig.getApiService()
 //                val selectedItem = parent.getItemAtPosition(position).toString()
 //                val requestBody = selectedItem.toRequestBody("text/plain".toMediaType())
@@ -70,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+
             }
 
 //            override fun onNothingSelected(parent: AdapterView<*>) {
@@ -109,13 +115,19 @@ class MainActivity : AppCompatActivity() {
                             position: Int,
                             id: Long
                         ) {
+                            view?.let {
+                                // Your existing code here
+                            } ?: run {
+                                // Handle the null case, log it or show a toast
+                                Toast.makeText(this@MainActivity, "View is null", Toast.LENGTH_SHORT).show()
+                            }
 //                            val selectedItem = parent.getItemAtPosition(position).toString()
 //                            val requestBody = selectedItem.toRequestBody("text/plain".toMediaType())
 //                            apiService.uploadText(requestBody)
                         }
 
                         override fun onNothingSelected(parent: AdapterView<*>?) {
-                            TODO("Not yet implemented")
+
                         }
 
 //                        override fun onNothingSelected(parent: AdapterView<*>) {

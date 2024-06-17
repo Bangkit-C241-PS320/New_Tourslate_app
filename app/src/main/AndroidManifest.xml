@@ -13,6 +13,9 @@
         android:theme="@style/Theme.New_Tourslate"
         tools:targetApi="31">
         <activity
+            android:name=".ui.onboarding.OnBoardingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.history.HistoryActivity"
             android:exported="false" />
         <activity
@@ -26,8 +29,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.splash.SplashScreenActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,8 +38,7 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -11,14 +11,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import com.example.new_tourslate.R
 import com.example.new_tourslate.databinding.ActivitySplashScreenBinding
-import com.example.new_tourslate.ui.login.LoginActivity
 import com.example.new_tourslate.ui.main.MainActivity
-import com.example.new_tourslate.ui.setting.SettingPreferences
+import com.example.new_tourslate.data.pref.SettingPreferences
 import com.example.new_tourslate.ui.setting.SettingViewModel
 import com.example.new_tourslate.ui.setting.ViewModelFactory
-import com.example.new_tourslate.ui.setting.dataStore
+import com.example.new_tourslate.data.pref.dataStore
+import com.example.new_tourslate.ui.onboarding.OnBoardingActivity
 
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -61,7 +60,7 @@ class SplashScreenActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(if (it) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
 
             Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, OnBoardingActivity::class.java)
                 startActivity(intent)
                 finish()
             }, 2000)

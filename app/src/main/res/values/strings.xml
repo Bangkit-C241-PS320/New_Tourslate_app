@@ -21,4 +21,13 @@
     <string name="password">Password</string>
     <string name="sudah_memiliki_akun">Do you have account?</string>
     <string name="login_disini">Login Here!</string>
+
+    //onboading
+    <string name="tittle_menu_1">Welcome to the Tourslate app!</string>
+    <string name="tittle_menu_2">Easy use translate feature!</string>
+    <string name="tittle_menu_3">There is a History feature!</string>
+    <string name="desc_menu_1">Discover a new way to understand every regional language with the Tourslate app. Start now increasing your productivity with our features!</string>
+    <string name="desc_menu_2">Tourslate App makes it easy for you to translate every regional language from western Indonesia to eastern Indonesia with just 1 click!</string>
+    <string name="desc_menu_3">This feature to make it easier for us to find out what we have translated, lets use Tourslate!</string>
+
 </resources>

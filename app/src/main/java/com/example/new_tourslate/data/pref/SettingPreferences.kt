@@ -1,4 +1,4 @@
-package com.example.new_tourslate.ui.setting
+package com.example.new_tourslate.data.pref
 
 import android.content.Context
 import androidx.datastore.core.DataStore

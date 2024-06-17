@@ -1,12 +1,16 @@
 package com.example.new_tourslate.ui.setting
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.example.new_tourslate.R
+import com.example.new_tourslate.data.pref.SettingPreferences
+import com.example.new_tourslate.data.pref.dataStore
 import com.example.new_tourslate.databinding.ActivitySettingBinding
+import com.example.new_tourslate.ui.main.MainActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingActivity : AppCompatActivity() {
