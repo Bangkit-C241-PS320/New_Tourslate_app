@@ -1,21 +1,11 @@
 package com.example.new_tourslate.ui.main
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.CompoundButton
-import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat.startActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.new_tourslate.R
 import com.example.new_tourslate.data.retrofit.ApiConfig
+import com.example.new_tourslate.data.retrofit.ApiService
+import com.example.new_tourslate.data.retrofit.TranslateResponse
 import com.example.new_tourslate.databinding.ActivityMainBinding
 import com.example.new_tourslate.ui.history.HistoryActivity
 import com.example.new_tourslate.ui.login.LoginActivity
@@ -26,12 +16,15 @@ import com.example.new_tourslate.ui.setting.SettingActivity
 //import retrofit2.Callback
 //import retrofit2.HttpException
 //import retrofit2.Response
-import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.auth.FirebaseAuth
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var apiService: ApiService
     private lateinit var auth: FirebaseAuth
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
+        apiService = ApiConfig.getApiService()
 
         // Check if the user is logged in
         if (auth.currentUser == null) {
@@ -54,135 +48,35 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, HistoryActivity::class.java))
         }
         //go to setting activity
-        binding.settingButton.setOnClickListener{
+        binding.settingButton.setOnClickListener {
             startActivity(Intent(this, SettingActivity::class.java))
         }
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.dropdown_items_input,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            binding.spinnerInput.adapter = adapter
+        //button click
+        binding.translateButton.setOnClickListener {
+            val textToTranslate = binding.editText.text.toString()
+            if (textToTranslate.isNotEmpty()) {
+                uploadText(textToTranslate)
+            }
         }
+    }
+    private fun uploadText(text: String) {
+//        val requestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), text)
+        val call = apiService.uploadText(text)
 
-        // Set up a listener for the spinner
-        binding.spinnerInput.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                view?.let {
-                    // Your existing code here
-                } ?: run {
-                    // Handle the null case, log it or show a toast
-                    Toast.makeText(this@MainActivity, "View is null", Toast.LENGTH_SHORT).show()
+        call.enqueue(object : Callback<TranslateResponse> {
+            override fun onResponse(call: Call<TranslateResponse>, response: Response<TranslateResponse>) {
+                if (response.isSuccessful) {
+                    val translateResponse = response.body()
+                    binding.result.text = translateResponse?.data?.translatedText ?: "Translation failed"
+                } else {
+                    binding.result.text = "Error: ${response.message()}"
                 }
-//                val apiService = ApiConfig.getApiService()
-//                val selectedItem = parent.getItemAtPosition(position).toString()
-//                val requestBody = selectedItem.toRequestBody("text/plain".toMediaType())
-//                apiService.uploadText(requestBody)
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
+            override fun onFailure(call: Call<TranslateResponse>, t: Throwable) {
+                binding.result.text = "Error: ${t.message}"
             }
-
-//            override fun onNothingSelected(parent: AdapterView<*>) {
-//                val apiService = ApiConfig.getApiService()
-//                val requestBody = "Indonesia".toRequestBody("text/plain".toMediaType())
-//                apiService.uploadText(requestBody)
-//            }
-        }
-
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.dropdown_items_result,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            binding.spinnerInput2.adapter = adapter
-        }
-
-        // Set up a listener for the spinner
-        binding.spinnerInput2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
-            ) {
-                val apiService = ApiConfig.getApiService()
-                binding.spinnerInput2.onItemSelectedListener =
-                    object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(
-                            parent: AdapterView<*>,
-                            view: View?,
-                            position: Int,
-                            id: Long
-                        ) {
-                            view?.let {
-                                // Your existing code here
-                            } ?: run {
-                                // Handle the null case, log it or show a toast
-                                Toast.makeText(this@MainActivity, "View is null", Toast.LENGTH_SHORT).show()
-                            }
-//                            val selectedItem = parent.getItemAtPosition(position).toString()
-//                            val requestBody = selectedItem.toRequestBody("text/plain".toMediaType())
-//                            apiService.uploadText(requestBody)
-                        }
-
-                        override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                        }
-
-//                        override fun onNothingSelected(parent: AdapterView<*>) {
-//                            val apiService = ApiConfig.getApiService()
-//                            val requestBody = "English".toRequestBody("text/plain".toMediaType())
-//                            apiService.uploadText(requestBody)
-//                        }
-                    }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-//            private fun getResult() {
-//                val apiService = ApiConfig.getApiService()
-//                apiService.getText().enqueue(object : Callback<CancerNewsResponse> {
-//                    override fun onResponse(
-//                        call: Call<CancerNewsResponse>,
-//                        response: Response<CancerNewsResponse>
-//                    ) {
-//                        if (response.isSuccessful) {
-//                            val data = response.body()
-//                            // Assuming your data has a "title" field for display
-//                            val title =
-//                                data?.title ?: "No data available"  // Handle potential null value
-//                            textView.text = title
-//                        } else {
-//                            // Handle API error
-//                            textView.text = "Error fetching data"
-//                        }
-//                    }
-//
-//                    override fun onFailure(call: Call<List<Post>>, t: Throwable) {
-//                        // Tampilkan pesan error jika request gagal
-//                    }
-//                })
-//            }
-
-//
-        }
+        })
     }
 }

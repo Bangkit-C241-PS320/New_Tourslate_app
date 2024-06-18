@@ -69,6 +69,8 @@
             android:layout_height="match_parent"
             android:gravity="top"
             android:hint="@string/hint"
+            android:fontFamily="@font/noto_serif"
+            android:textColor="@color/black"
             android:textColorHint="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -90,6 +92,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinner_input"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/noto_serif"
+        android:textColor="@color/black"
         tools:text="This is the result of the app"
         android:background="@drawable/background_shadow"
         />
