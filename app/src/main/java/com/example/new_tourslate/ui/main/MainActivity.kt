@@ -2,6 +2,7 @@ package com.example.new_tourslate.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.new_tourslate.data.retrofit.ApiConfig
 import com.example.new_tourslate.data.retrofit.ApiService
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         binding.translateButton.setOnClickListener {
             val textToTranslate = binding.editText.text.toString()
             if (textToTranslate.isNotEmpty()) {
+                binding.progressBar.visibility = View.VISIBLE
                 uploadText(textToTranslate)
             }
         }
@@ -66,6 +68,7 @@ class MainActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<TranslateResponse> {
             override fun onResponse(call: Call<TranslateResponse>, response: Response<TranslateResponse>) {
+                binding.progressBar.visibility = View.GONE
                 if (response.isSuccessful) {
                     val translateResponse = response.body()
                     binding.result.text = translateResponse?.data?.translatedText ?: "Translation failed"
@@ -75,6 +78,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<TranslateResponse>, t: Throwable) {
+                binding.progressBar.visibility = View.GONE
                 binding.result.text = "Error: ${t.message}"
             }
         })

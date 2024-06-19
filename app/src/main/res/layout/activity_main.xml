@@ -59,6 +59,7 @@
         android:layout_height="200dp"
         android:background="@drawable/background_shadow"
         app:boxStrokeWidth="0dp"
+        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_name">
@@ -87,11 +88,13 @@
     <TextView
         android:id="@+id/result"
         android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinner_input"
         android:layout_marginTop="10dp"
+        android:elevation="8dp"
+        android:padding="15dp"
         android:fontFamily="@font/noto_serif"
         android:textColor="@color/black"
         tools:text="This is the result of the app"
@@ -122,6 +125,17 @@
         android:text="@string/translate"
         android:textSize="20sp"
         />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
