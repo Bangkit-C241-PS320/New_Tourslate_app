@@ -1,5 +1,7 @@
 package com.example.new_tourslate.data.retrofit
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class TranslateResponse(
@@ -14,8 +16,8 @@ data class TranslateResponse(
 	val status: String? = null
 )
 
+@Entity(tableName = "history")
 data class Data(
-
 	@field:SerializedName("originalText")
 	val originalText: String? = null,
 
@@ -25,6 +27,7 @@ data class Data(
 	@field:SerializedName("translatedText")
 	val translatedText: String? = null,
 
+	@PrimaryKey
 	@field:SerializedName("id")
-	val id: String? = null
+	val id: String
 )

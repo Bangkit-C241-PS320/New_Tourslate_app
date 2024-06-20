@@ -23,12 +23,12 @@
             android:textColor="@color/blue"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/input_text"
-            app:layout_constraintEnd_toEndOf="@+id/input_text"
-            app:layout_constraintStart_toStartOf="@+id/input_text" />
+            app:layout_constraintBottom_toTopOf="@+id/tvOriginal"
+            app:layout_constraintEnd_toEndOf="@+id/tvOriginal"
+            app:layout_constraintStart_toStartOf="@+id/tvOriginal" />
 
         <TextView
-            android:id="@+id/input_text"
+            android:id="@+id/tvOriginal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -46,8 +46,8 @@
             android:layout_marginBottom="2dp"
             android:src="@drawable/forward"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/result_text"
-            app:layout_constraintStart_toEndOf="@+id/input_text" />
+            app:layout_constraintEnd_toStartOf="@+id/tvTranslate"
+            app:layout_constraintStart_toEndOf="@+id/tvOriginal" />
 
 
         <TextView
@@ -58,12 +58,12 @@
             android:textColor="@color/blue"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/result_text"
-            app:layout_constraintEnd_toEndOf="@+id/result_text"
-            app:layout_constraintStart_toStartOf="@+id/result_text" />
+            app:layout_constraintBottom_toTopOf="@+id/tvTranslate"
+            app:layout_constraintEnd_toEndOf="@+id/tvTranslate"
+            app:layout_constraintStart_toStartOf="@+id/tvTranslate" />
 
         <TextView
-            android:id="@+id/result_text"
+            android:id="@+id/tvTranslate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"

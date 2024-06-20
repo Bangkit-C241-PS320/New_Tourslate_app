@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -63,5 +64,12 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.jetbrains.kotlinx.coroutines.android)
-    implementation("androidx.paging:paging-runtime-ktx:3.1.0")
+    implementation(libs.androidx.paging.runtime.ktx)
+
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.room.compiler)
+    implementation(libs.androidx.activity.ktx)
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
+
+
 }
