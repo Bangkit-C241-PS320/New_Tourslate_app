@@ -2,6 +2,7 @@ package com.example.new_tourslate.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.new_tourslate.data.retrofit.ApiConfig
@@ -11,12 +12,6 @@ import com.example.new_tourslate.databinding.ActivityMainBinding
 import com.example.new_tourslate.ui.history.HistoryActivity
 import com.example.new_tourslate.ui.login.LoginActivity
 import com.example.new_tourslate.ui.setting.SettingActivity
-//import okhttp3.MediaType.Companion.toMediaType
-//import okhttp3.RequestBody.Companion.toRequestBody
-//import retrofit2.Call
-//import retrofit2.Callback
-//import retrofit2.HttpException
-//import retrofit2.Response
 import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,8 +51,10 @@ class MainActivity : AppCompatActivity() {
         //button click
         binding.translateButton.setOnClickListener {
             val textToTranslate = binding.editText.text.toString()
+            binding.progressBar.visibility = View.VISIBLE
             if (textToTranslate.isNotEmpty()) {
                 binding.progressBar.visibility = View.VISIBLE
+                Log.d("MainActivity", "ProgressBar set to VISIBLE")
                 uploadText(textToTranslate)
             }
         }
@@ -69,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         call.enqueue(object : Callback<TranslateResponse> {
             override fun onResponse(call: Call<TranslateResponse>, response: Response<TranslateResponse>) {
                 binding.progressBar.visibility = View.GONE
+                Log.d("MainActivity", "ProgressBar set to GONE")
                 if (response.isSuccessful) {
                     val translateResponse = response.body()
                     binding.result.text = translateResponse?.data?.translatedText ?: "Translation failed"
@@ -79,6 +77,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<TranslateResponse>, t: Throwable) {
                 binding.progressBar.visibility = View.GONE
+                Log.d("MainActivity", "ProgressBar set to GONE")
                 binding.result.text = "Error: ${t.message}"
             }
         })
