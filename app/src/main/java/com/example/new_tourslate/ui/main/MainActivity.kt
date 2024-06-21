@@ -7,7 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.new_tourslate.data.retrofit.ApiConfig
 import com.example.new_tourslate.data.retrofit.ApiService
-import com.example.new_tourslate.data.retrofit.TranslateResponse
+import com.example.new_tourslate.data.response.TranslateResponse
 import com.example.new_tourslate.databinding.ActivityMainBinding
 import com.example.new_tourslate.ui.history.HistoryActivity
 import com.example.new_tourslate.ui.login.LoginActivity

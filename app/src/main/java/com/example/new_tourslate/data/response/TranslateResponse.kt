@@ -1,4 +1,4 @@
-package com.example.new_tourslate.data.retrofit
+package com.example.new_tourslate.data.response
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

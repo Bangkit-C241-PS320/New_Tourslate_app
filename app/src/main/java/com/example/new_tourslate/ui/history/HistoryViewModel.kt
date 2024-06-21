@@ -1,6 +1,7 @@
 package com.example.new_tourslate.ui.history
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -8,13 +9,19 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.new_tourslate.data.repository.HistoryRepository
-import com.example.new_tourslate.data.retrofit.Data
+import com.example.new_tourslate.data.response.Data
+import com.example.new_tourslate.data.response.DataItem
+import com.example.new_tourslate.data.response.History
 import com.example.new_tourslate.di.Injection
 
-class HistoryViewModel(private val historyRepository: HistoryRepository): ViewModel() {
+class HistoryViewModel(historyRepository: HistoryRepository): ViewModel() {
 
-    val history: LiveData<PagingData<Data>> =
+    val history: LiveData<PagingData<DataItem>> =
         historyRepository.getHistory().cachedIn(viewModelScope)
+
+    init {
+        Log.d("HistoryViewModel", "HistoryViewModel initialized")
+    }
 }
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {

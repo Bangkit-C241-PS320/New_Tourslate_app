@@ -1,5 +1,5 @@
 [versions]
-agp = "8.4.0"
+agp = "8.3.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -20,6 +20,7 @@ roomCompiler = "2.5.2"
 roomKtx = "2.5.2"
 activityKtx = "1.4.0"
 pagingRuntimeKtx = "3.1.0"
+roomCommon = "2.6.1"
 
 
 
@@ -42,6 +43,7 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCom
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
 androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
+androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
 
 
 
